@@ -8,6 +8,12 @@
 
 [Install](#install) · [Features](#features) · [Usage](#usage) · [Languages](#languages) · [Contributing](#contributing)
 
+<br>
+
+<img src="screenshots/demo.png" alt="X Translator Demo — multi-language tweet with inline translations" width="520">
+
+*6 languages in one tweet, each line translated inline*
+
 </div>
 
 ---
