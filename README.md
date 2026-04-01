@@ -4,7 +4,7 @@
 
 **Smart per-line tweet translation for X (Twitter)**
 
-75+ languages · Inline translation · Selection sync · Keyboard shortcut
+75+ languages · Inline translation · Selection sync · Desktop only (Chrome/Edge/Brave)
 
 [Install](#install) · [Features](#features) · [Usage](#usage) · [Languages](#languages) · [Contributing](#contributing)
 
@@ -35,6 +35,9 @@
 **Zero Config** — Works out of the box. Install, press ⇧T, done. Language defaults to your browser language.
 
 ## Install
+
+> **Desktop only** — Chrome, Edge, Brave, Arc, Opera on Windows / macOS / Linux.
+> Mobile (iOS / Android) is not supported — X App does not allow extensions.
 
 ### Method 1: Download ZIP (Easiest)
 
