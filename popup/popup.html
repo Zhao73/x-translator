@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 340px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: #000;
+      color: #e7e9ea;
+    }
+
+    /* ── Hero header ── */
+    .hero {
+      background: linear-gradient(135deg, #0a1628 0%, #0d2240 50%, #1a3a5c 100%);
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid rgba(29, 155, 240, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(29, 155, 240, 0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-top {
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .hero-title {
+      font-size: 20px; font-weight: 800; letter-spacing: -0.3px;
+    }
+    .hero-x { color: #1d9bf0; }
+    .hero-badge {
+      font-size: 10px; color: #1d9bf0; background: rgba(29, 155, 240, 0.12);
+      padding: 2px 8px; border-radius: 10px; font-weight: 600;
+      border: 1px solid rgba(29, 155, 240, 0.2);
+    }
+    .hero-sub {
+      font-size: 11px; color: #71767b; margin-top: 4px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Content ── */
+    .content { padding: 14px 16px 16px; }
+
+    /* ── Toggle row ── */
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(135deg, #16181c, #1c1f24);
+      padding: 14px 16px; border-radius: 14px; margin-bottom: 14px;
+      border: 1px solid #2f3336;
+      transition: border-color 0.2s;
+    }
+    .toggle-row:hover { border-color: #3a3f44; }
+    .toggle-label { font-size: 14px; font-weight: 500; }
+    .toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
+    .toggle-switch input { display: none; }
+    .toggle-slider {
+      position: absolute; inset: 0; background: #333639;
+      border-radius: 12px; transition: all 0.25s ease;
+    }
+    .toggle-slider::after {
+      content: ""; position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; background: #fff;
+      border-radius: 50%; transition: transform 0.25s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .toggle-switch input:checked + .toggle-slider {
+      background: #1d9bf0;
+      box-shadow: 0 0 12px rgba(29, 155, 240, 0.3);
+    }
+    .toggle-switch input:checked + .toggle-slider::after { transform: translateX(20px); }
+
+    /* ── Section ── */
+    .section-label {
+      font-size: 10px; color: #536471; margin-bottom: 6px; margin-top: 2px;
+      text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600;
+    }
+
+    /* ── Select ── */
+    select {
+      width: 100%; padding: 10px 14px; background: #16181c; color: #e7e9ea;
+      border: 1px solid #2f3336; border-radius: 12px; font-size: 13px;
+      cursor: pointer; outline: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371767b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+      margin-bottom: 14px; transition: border-color 0.2s;
+    }
+    select:focus { border-color: #1d9bf0; box-shadow: 0 0 0 1px rgba(29,155,240,0.2); }
+
+    optgroup { color: #536471; font-style: normal; font-size: 11px; font-weight: 600; }
+    optgroup option { color: #e7e9ea; font-size: 13px; font-weight: 400; }
+
+    /* ── Shortcut pill ── */
+    .shortcut-pill {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: linear-gradient(135deg, #16181c, #1c1f24);
+      border: 1px solid #2f3336; border-radius: 12px;
+      padding: 10px 16px; margin-bottom: 12px;
+    }
+    .shortcut-pill-label { font-size: 11px; color: #71767b; }
+    kbd {
+      background: #2f3336; color: #1d9bf0; padding: 3px 10px;
+      border-radius: 6px; font-size: 13px; font-weight: 600;
+      font-family: "SF Mono", Menlo, monospace;
+      border: 1px solid #3e4144;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center; padding: 8px 0 4px;
+    }
+    .footer-status {
+      font-size: 11px; color: #71767b; line-height: 1.5;
+    }
+    .dot {
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; margin-right: 5px; vertical-align: middle;
+    }
+    .dot.on { background: #00ba7c; box-shadow: 0 0 6px rgba(0,186,124,0.4); }
+    .dot.off { background: #71767b; }
+
+    /* ── Language selector label ── */
+    .lang-selector-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .lang-current {
+      font-size: 10px; color: #1d9bf0; font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-title"><span class="hero-x">X</span> Translator</span>
+      <span class="hero-badge">v5.0</span>
+    </div>
+    <div class="hero-sub" data-i18n="heroSub"></div>
+  </div>
+
+  <div class="content">
+    <!-- Toggle -->
+    <div class="toggle-row">
+      <span class="toggle-label" data-i18n="enableTranslation"></span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggleEnabled">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <!-- Target language -->
+    <div class="lang-selector-row">
+      <span class="section-label" data-i18n="targetLanguage"></span>
+      <span class="lang-current" id="langCurrentLabel"></span>
+    </div>
+    <select id="targetLang">
+      <optgroup data-i18n-label="groupAuto">
+        <option value="auto" data-i18n="langAuto"></option>
+      </optgroup>
+      <optgroup data-i18n-label="groupCommon">
+        <option value="zh-CN" data-i18n="langZhCN"></option>
+        <option value="zh-TW" data-i18n="langZhTW"></option>
+        <option value="en" data-i18n="langEn"></option>
+        <option value="ja" data-i18n="langJa"></option>
+        <option value="ko" data-i18n="langKo"></option>
+      </optgroup>
+      <optgroup data-i18n-label="groupEurope">
+        <option value="fr" data-i18n="langFr"></option>
+        <option value="de" data-i18n="langDe"></option>
+        <option value="es" data-i18n="langEs"></option>
+        <option value="pt" data-i18n="langPt"></option>
+        <option value="it" data-i18n="langIt"></option>
+        <option value="nl" data-i18n="langNl"></option>
+        <option value="pl" data-i18n="langPl"></option>
+        <option value="ro" data-i18n="langRo"></option>
+        <option value="cs" data-i18n="langCs"></option>
+        <option value="sk" data-i18n="langSk"></option>
+        <option value="hu" data-i18n="langHu"></option>
+        <option value="el" data-i18n="langEl"></option>
+        <option value="bg" data-i18n="langBg"></option>
+        <option value="hr" data-i18n="langHr"></option>
+        <option value="sr" data-i18n="langSr"></option>
+        <option value="sl" data-i18n="langSl"></option>
+        <option value="bs" data-i18n="langBs"></option>
+        <option value="mk" data-i18n="langMk"></option>
+        <option value="sq" data-i18n="langSq"></option>
+        <option value="uk" data-i18n="langUk"></option>
+        <option value="be" data-i18n="langBe"></option>
+        <option value="ru" data-i18n="langRu"></option>
+        <option value="lt" data-i18n="langLt"></option>
+        <option value="lv" data-i18n="langLv"></option>
+        <option value="et" data-i18n="langEt"></option>
+        <option value="sv" data-i18n="langSv"></option>
+        <option value="da" data-i18n="langDa"></option>
+        <option value="no" data-i18n="langNo"></option>
+        <option value="fi" data-i18n="langFi"></option>
+        <option value="is" data-i18n="langIs"></option>
+        <option value="ga" data-i18n="langGa"></option>
+        <option value="cy" data-i18n="langCy"></option>
+        <option value="ca" data-i18n="langCa"></option>
+        <option value="eu" data-i18n="langEu"></option>
+        <option value="gl" data-i18n="langGl"></option>
+        <option value="mt" data-i18n="langMt"></option>
+        <option value="lb" data-i18n="langLb"></option>
+      </optgroup>
+      <optgroup data-i18n-label="groupAsia">
+        <option value="hi" data-i18n="langHi"></option>
+        <option value="bn" data-i18n="langBn"></option>
+        <option value="ta" data-i18n="langTa"></option>
+        <option value="te" data-i18n="langTe"></option>
+        <option value="mr" data-i18n="langMr"></option>
+        <option value="gu" data-i18n="langGu"></option>
+        <option value="kn" data-i18n="langKn"></option>
+        <option value="ml" data-i18n="langMl"></option>
+        <option value="pa" data-i18n="langPa"></option>
+        <option value="ur" data-i18n="langUr"></option>
+        <option value="ne" data-i18n="langNe"></option>
+        <option value="si" data-i18n="langSi"></option>
+        <option value="th" data-i18n="langTh"></option>
+        <option value="vi" data-i18n="langVi"></option>
+        <option value="id" data-i18n="langId"></option>
+        <option value="ms" data-i18n="langMs"></option>
+        <option value="fil" data-i18n="langFil"></option>
+        <option value="my" data-i18n="langMy"></option>
+        <option value="km" data-i18n="langKm"></option>
+        <option value="lo" data-i18n="langLo"></option>
+        <option value="mn" data-i18n="langMn"></option>
+        <option value="ka" data-i18n="langKa"></option>
+        <option value="hy" data-i18n="langHy"></option>
+        <option value="kk" data-i18n="langKk"></option>
+        <option value="uz" data-i18n="langUz"></option>
+        <option value="ky" data-i18n="langKy"></option>
+        <option value="tg" data-i18n="langTg"></option>
+        <option value="tk" data-i18n="langTk"></option>
+        <option value="az" data-i18n="langAz"></option>
+      </optgroup>
+      <optgroup data-i18n-label="groupMiddleEast">
+        <option value="ar" data-i18n="langAr"></option>
+        <option value="fa" data-i18n="langFa"></option>
+        <option value="he" data-i18n="langHe"></option>
+        <option value="tr" data-i18n="langTr"></option>
+        <option value="ku" data-i18n="langKu"></option>
+        <option value="ps" data-i18n="langPs"></option>
+      </optgroup>
+      <optgroup data-i18n-label="groupAfrica">
+        <option value="sw" data-i18n="langSw"></option>
+        <option value="am" data-i18n="langAm"></option>
+        <option value="ha" data-i18n="langHa"></option>
+        <option value="yo" data-i18n="langYo"></option>
+        <option value="ig" data-i18n="langIg"></option>
+        <option value="zu" data-i18n="langZu"></option>
+        <option value="xh" data-i18n="langXh"></option>
+        <option value="af" data-i18n="langAf"></option>
+        <option value="so" data-i18n="langSo"></option>
+        <option value="mg" data-i18n="langMg"></option>
+        <option value="rw" data-i18n="langRw"></option>
+      </optgroup>
+      <optgroup data-i18n-label="groupOther">
+        <option value="eo" data-i18n="langEo"></option>
+        <option value="la" data-i18n="langLa"></option>
+        <option value="haw" data-i18n="langHaw"></option>
+        <option value="mi" data-i18n="langMi"></option>
+        <option value="sm" data-i18n="langSm"></option>
+      </optgroup>
+    </select>
+
+    <!-- Shortcut -->
+    <div class="shortcut-pill">
+      <span class="shortcut-pill-label" data-i18n="shortcutLabel"></span>
+      <kbd>⇧</kbd><span style="color:#536471">+</span><kbd>T</kbd>
+    </div>
+
+    <!-- Status -->
+    <div class="footer">
+      <div class="footer-status" id="statusText"></div>
+    </div>
+  </div>
+
+  <script src="../lib/i18n.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
