@@ -36,21 +36,42 @@
 
 ## Install
 
-### From Source (Developer)
+### Method 1: Download ZIP (Easiest)
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/user/x-translator.git
-   ```
-2. Open Chrome → `chrome://extensions/`
-3. Enable **Developer mode** (top-right toggle)
-4. Click **Load unpacked**
-5. Select the cloned folder
-6. Done — the icon appears in your toolbar
+> **3 steps, no coding required**
 
-### From Chrome Web Store
+**Step 1** — Download and unzip
 
-*Coming soon*
+Go to [**Releases**](https://github.com/Zhao73/x-translator/releases/latest) → click **`x-translator-v5.0.zip`** → unzip the downloaded file to a folder
+
+**Step 2** — Open Chrome extensions page
+
+Copy and paste this into your Chrome address bar:
+```
+chrome://extensions/
+```
+Then turn on **Developer mode** (toggle in the top-right corner)
+
+**Step 3** — Load the extension
+
+Click **"Load unpacked"** → select the folder you just unzipped → Done!
+
+The **X Translator** icon will appear in your Chrome toolbar. Open [x.com](https://x.com) and press `⇧T` to start translating.
+
+> **Tip:** If you don't see the icon, click the 🧩 puzzle icon in Chrome toolbar and pin X Translator.
+
+---
+
+### Method 2: Git Clone (Developers)
+
+```bash
+git clone https://github.com/Zhao73/x-translator.git
+```
+Then follow Step 2 and Step 3 above.
+
+### Chrome Web Store
+
+*Coming soon — one-click install*
 
 ## Usage
 
